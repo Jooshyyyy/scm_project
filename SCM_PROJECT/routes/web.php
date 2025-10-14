@@ -6,3 +6,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('roles', RoleController::class);
+Route::resource('providers', ProviderController::class);
