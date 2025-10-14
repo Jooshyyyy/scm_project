@@ -7,28 +7,24 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $roles= Role::all();
+        return view ('roles.index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+      return view('roles.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $request->validate(['name'=>'required|unique:roles']);
+        Role::create($request->all());
+        return redirect()->route('roles.index')->with('success','Rol creado exitosamente');
     }
 
     /**
