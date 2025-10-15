@@ -9,4 +9,4 @@ Route::get('/', function () {
 });
 Route::resource('roles', RoleController::class);
 Route::resource('providers', ProviderController::class);
-Route::resource('produtcs', ProductController::class);
+Route::resource('products', ProductController::class);
