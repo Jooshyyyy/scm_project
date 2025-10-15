@@ -24,7 +24,7 @@ class ProviderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required|unique:providers.name',
+            'name'=> 'required|unique:providers,name',
         ]);
 
         Provider::create($request->all());

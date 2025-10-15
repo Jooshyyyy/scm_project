@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <h1>Editar Proveedor</h1>
-    <form action="{{route(providers.update),$provider->id }} " method="POST">
+    <form action="{{ route('providers.update', $provider->id) }}" method="POST">
         @csrf
         @method('PUT')
         <label >Nombre:</label>
