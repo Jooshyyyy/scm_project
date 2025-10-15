@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <h1>Lista de Productos</h1>
-    <a href="{{route('producs.create')}}">Nuevo Producto</a>
+    <a href="{{route('products.create')}}">Nuevo Producto</a>
     @if (session('success'))
         <p>{{session('success')}}</p>
     @endif
