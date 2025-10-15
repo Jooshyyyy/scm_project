@@ -12,7 +12,8 @@
     <a href="{{route('roles.create') }}">Nuevo Rol</a>
     <ul>
         @foreach ($roles as $role)
-            <li>{{ $role->name}}</li>
+            <li>{{$role->name}}</li>
+        @endforeach
     </ul>
 </body>
 </html>
