@@ -3,63 +3,60 @@
 namespace App\Http\Controllers;
 
 use App\Models\Purchase;
+use App\Models\Provider;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $purchases=Purchase::with('provider')->get();
+        return view('purchases.index',compact('purchases'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $providers=Provider::all();
+        return view('purchases.create',compact('providers'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'provider_id'=> 'required|exists:providers,id',
+            'puchase_date'=> 'required|date',
+            'total'=> 'required|numeric|min:0',
+            'status'=> 'required|string'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Purchase $purchase)
     {
-        //
+        return view('purchases.show',compact('purchase'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Purchase $purchase)
     {
-        //
+        $providers=Provider::all();
+        return view('purchases,edit',compact('purchases','providers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Purchase $purchase)
     {
-        //
+        $request->validate([
+            'provider_id'=> 'required|exists:providers,id',
+            'puchase_date'=> 'required|date',
+            'total'=> 'required|numeric|min:0',
+            'status'=> 'required|string'
+        ]);
+        $purchase->update($request->all());
+        return redirect()->route('purchases.index')->with('success','Compra actualizada correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Purchase $purchase)
     {
-        //
+        $purchase->delete();
+        return redirect()->route('purchases.index')->with('success','Compra borrada exitosamente');
     }
 }
